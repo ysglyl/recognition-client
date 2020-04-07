@@ -8,32 +8,32 @@ from config.config import Config
 class ServerSetting(QDialog):
     def __init__(self):
         super(ServerSetting, self).__init__()
-        self.setFixedSize(300, 275)
+        self.setFixedSize(300, 150)
         self.setWindowIcon(QIcon('icons/server.png'))
         self.setWindowTitle('服务器配置')
 
         lbl_host = QLabel('域名/IP', self)
-        lbl_host.setGeometry(10, 80, 50, 26)
+        lbl_host.setGeometry(10, 20, 50, 26)
         lbl_host.setAlignment(Qt.AlignCenter)
         self.le_host = QLineEdit(self)
         self.le_host.setText(Config.host)
-        self.le_host.setGeometry(70, 80, 200, 26)
+        self.le_host.setGeometry(70, 20, 200, 26)
         lbl_port = QLabel('端口', self)
-        lbl_port.setGeometry(10, 116, 50, 26)
+        lbl_port.setGeometry(10, 66, 50, 26)
         lbl_port.setAlignment(Qt.AlignCenter)
         self.le_port = QLineEdit(self)
         self.le_port.setText(Config.port)
-        self.le_port.setGeometry(70, 116, 200, 26)
+        self.le_port.setGeometry(70, 66, 200, 26)
 
         self.btn_save = QPushButton(self)
         self.btn_save.setText('保存')
-        self.btn_save.setGeometry(10, 234, 280, 30)
+        self.btn_save.setGeometry(10, 110, 280, 30)
         self.btn_save.clicked.connect(self.save)
 
     def save(self):
         host = self.le_host.text().strip(' ')
-        if host == '':
-            self.btn_save.setText('请输入主机名')
+        if host == '' or not (host.startswith("http://") or host.startswith("https://")):
+            self.btn_save.setText('域名/IP必须以http://或https://开头')
             self.le_host.setFocus()
             return
         port = self.le_port.text().strip(' ')
@@ -48,26 +48,26 @@ class ServerSetting(QDialog):
 class DimensionSetting(QDialog):
     def __init__(self):
         super(DimensionSetting, self).__init__()
-        self.setFixedSize(300, 275)
+        self.setFixedSize(300, 150)
         self.setWindowIcon(QIcon('icons/server.png'))
         self.setWindowTitle('窗口设置')
 
         lbl_width = QLabel('宽度', self)
-        lbl_width.setGeometry(10, 80, 50, 26)
+        lbl_width.setGeometry(10, 20, 50, 26)
         lbl_width.setAlignment(Qt.AlignCenter)
         self.le_width = QLineEdit(self)
         self.le_width.setText(str(Config.width))
-        self.le_width.setGeometry(70, 80, 200, 26)
+        self.le_width.setGeometry(70, 20, 200, 26)
         lbl_height = QLabel('高度', self)
-        lbl_height.setGeometry(10, 116, 50, 26)
+        lbl_height.setGeometry(10, 66, 50, 26)
         lbl_height.setAlignment(Qt.AlignCenter)
         self.le_height = QLineEdit(self)
         self.le_height.setText(str(Config.height))
-        self.le_height.setGeometry(70, 116, 200, 26)
+        self.le_height.setGeometry(70, 66, 200, 26)
 
         self.btn_save = QPushButton(self)
         self.btn_save.setText('保存')
-        self.btn_save.setGeometry(10, 234, 280, 30)
+        self.btn_save.setGeometry(10, 110, 280, 30)
         self.btn_save.clicked.connect(self.save)
 
     def save(self):

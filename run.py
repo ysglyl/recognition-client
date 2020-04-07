@@ -1,4 +1,3 @@
-
 from PySide2.QtWidgets import QApplication
 from main import MainWindow
 
